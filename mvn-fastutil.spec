@@ -4,15 +4,22 @@
 #
 Name     : mvn-fastutil
 Version  : 7.0.13
-Release  : 1
+Release  : 2
 URL      : https://github.com/vigna/fastutil/archive/7.0.13.tar.gz
 Source0  : https://github.com/vigna/fastutil/archive/7.0.13.tar.gz
-Source1  : https://repo1.maven.org/maven2/it/unimi/dsi/fastutil/7.0.13/fastutil-7.0.13.jar
-Source2  : https://repo1.maven.org/maven2/it/unimi/dsi/fastutil/7.0.13/fastutil-7.0.13.pom
+Source1  : https://repo1.maven.org/maven2/it/unimi/dsi/fastutil/6.5.7/fastutil-6.5.7.jar
+Source2  : https://repo1.maven.org/maven2/it/unimi/dsi/fastutil/6.5.7/fastutil-6.5.7.pom
+Source3  : https://repo1.maven.org/maven2/it/unimi/dsi/fastutil/7.0.13/fastutil-7.0.13.jar
+Source4  : https://repo1.maven.org/maven2/it/unimi/dsi/fastutil/7.0.13/fastutil-7.0.13.pom
+Source5  : https://repo1.maven.org/maven2/it/unimi/dsi/fastutil/8.2.1/fastutil-8.2.1.jar
+Source6  : https://repo1.maven.org/maven2/it/unimi/dsi/fastutil/8.2.1/fastutil-8.2.1.pom
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Apache-2.0
 Requires: mvn-fastutil-data = %{version}-%{release}
+Requires: mvn-fastutil-license = %{version}-%{release}
+BuildRequires : apache-ant
+BuildRequires : buildreq-mvn
 
 %description
 Welcome to fastutil.
@@ -32,16 +39,39 @@ Group: Data
 data components for the mvn-fastutil package.
 
 
+%package license
+Summary: license components for the mvn-fastutil package.
+Group: Default
+
+%description license
+license components for the mvn-fastutil package.
+
+
 %prep
+%setup -q -n fastutil-7.0.13
 
 %build
 
 %install
-mkdir -p %{buildroot}/usr/share/java/.m2/repository/it/unimi/dsi/fastutil/7.0.13
-cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/it/unimi/dsi/fastutil/7.0.13/fastutil-7.0.13.jar
+mkdir -p %{buildroot}/usr/share/package-licenses/mvn-fastutil
+cp LICENSE-2.0 %{buildroot}/usr/share/package-licenses/mvn-fastutil/LICENSE-2.0
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/it/unimi/dsi/fastutil/6.5.7
+cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/it/unimi/dsi/fastutil/6.5.7/fastutil-6.5.7.jar
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/it/unimi/dsi/fastutil/6.5.7
+cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/it/unimi/dsi/fastutil/6.5.7/fastutil-6.5.7.pom
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/it/unimi/dsi/fastutil/7.0.13
-cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/it/unimi/dsi/fastutil/7.0.13/fastutil-7.0.13.pom
+cp %{SOURCE3} %{buildroot}/usr/share/java/.m2/repository/it/unimi/dsi/fastutil/7.0.13/fastutil-7.0.13.jar
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/it/unimi/dsi/fastutil/7.0.13
+cp %{SOURCE4} %{buildroot}/usr/share/java/.m2/repository/it/unimi/dsi/fastutil/7.0.13/fastutil-7.0.13.pom
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/it/unimi/dsi/fastutil/8.2.1
+cp %{SOURCE5} %{buildroot}/usr/share/java/.m2/repository/it/unimi/dsi/fastutil/8.2.1/fastutil-8.2.1.jar
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/it/unimi/dsi/fastutil/8.2.1
+cp %{SOURCE6} %{buildroot}/usr/share/java/.m2/repository/it/unimi/dsi/fastutil/8.2.1/fastutil-8.2.1.pom
 
 
 %files
@@ -49,5 +79,13 @@ cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/it/unimi/dsi/fastutil/7
 
 %files data
 %defattr(-,root,root,-)
+/usr/share/java/.m2/repository/it/unimi/dsi/fastutil/6.5.7/fastutil-6.5.7.jar
+/usr/share/java/.m2/repository/it/unimi/dsi/fastutil/6.5.7/fastutil-6.5.7.pom
 /usr/share/java/.m2/repository/it/unimi/dsi/fastutil/7.0.13/fastutil-7.0.13.jar
 /usr/share/java/.m2/repository/it/unimi/dsi/fastutil/7.0.13/fastutil-7.0.13.pom
+/usr/share/java/.m2/repository/it/unimi/dsi/fastutil/8.2.1/fastutil-8.2.1.jar
+/usr/share/java/.m2/repository/it/unimi/dsi/fastutil/8.2.1/fastutil-8.2.1.pom
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/mvn-fastutil/LICENSE-2.0
